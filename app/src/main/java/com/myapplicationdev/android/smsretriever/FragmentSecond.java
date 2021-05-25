@@ -98,10 +98,14 @@ public class FragmentSecond extends Fragment {
                 String textString = etFilter.getText().toString();
                 String[] splitString = textString.split(",");
                 //String[] filterArgs = {};
+                String[] filterArgs = new String[splitString.length];
                 String smsBody = "";
-                for (int i=0;i< splitString.length;i++){
-                        String name = "%" + splitString[i].toString() + "%";
-                        String[] filterArgs = {name};
+                for (int i=0;i< splitString.length;i++) {
+                    String name = "%" + splitString[i].toString() + "%";
+                    //String[] filterArgs = {name};
+                    filterArgs[i] = name;
+                    filter += "OR body LIKE ?";
+                }
                     Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
 
                     if (cursor.moveToFirst()) {
@@ -120,7 +124,7 @@ public class FragmentSecond extends Fragment {
                                     + "\n\"" + body + "\"\n\n";
                         } while (cursor.moveToNext());
                     }
-                }
+
 
 //                Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
 //                String smsBody = "";
