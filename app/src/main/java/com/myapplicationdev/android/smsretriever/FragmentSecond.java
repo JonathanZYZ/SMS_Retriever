@@ -2,6 +2,7 @@ package com.myapplicationdev.android.smsretriever;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import android.widget.TextView;
 // * create an instance of this fragment.
 // */
 public class FragmentSecond extends Fragment {
-    Button btnRetrieve;
+    Button btnRetrieve, btnEmail;
     TextView tvFrag2;
     EditText etFilter;
 //    // TODO: Rename parameter arguments, choose names that match
@@ -73,6 +74,9 @@ public class FragmentSecond extends Fragment {
         tvFrag2 = view.findViewById(R.id.tvTextFrag2);
         etFilter = view.findViewById(R.id.etNameFrag2);
         btnRetrieve = view.findViewById(R.id.btnAddTextFrag2);
+        btnEmail = view.findViewById(R.id.btnEmail);
+
+
         btnRetrieve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,6 +141,26 @@ public class FragmentSecond extends Fragment {
 //                    } while (cursor.moveToNext());
 //                }
                 tvFrag2.setText(smsBody);
+            }
+        });
+
+        btnEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+
+                email.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{"19034275@rp.edu.sg"});
+                email.putExtra(Intent.EXTRA_SUBJECT,
+                        "");
+                String statement =  tvFrag2.getText().toString();
+                email.putExtra(Intent.EXTRA_TEXT,
+                        statement);
+
+                email.setType("message/rfc822");
+
+                startActivity(Intent.createChooser(email,
+                        "Choose an Email client :"));
             }
         });
         // Inflate the layout for this fragment
