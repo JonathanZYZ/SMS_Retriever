@@ -2,6 +2,7 @@ package com.myapplicationdev.android.smsretriever;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import android.widget.TextView;
 public class FragmentFirst extends Fragment {
 
     TextView tvSms;
-    Button btnRetrieve;
+    Button btnRetrieve , btnEmail;
     EditText etNumber;
 
     @Override
@@ -32,6 +33,27 @@ public class FragmentFirst extends Fragment {
         tvSms = view.findViewById(R.id.tvOutput);
         btnRetrieve = view.findViewById(R.id.btnAddTextFrag1);
         etNumber = view.findViewById(R.id.etNumber);
+        btnEmail = view.findViewById(R.id.btnEmail);
+
+        btnEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+
+                email.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{"19034275@rp.edu.sg"});
+                email.putExtra(Intent.EXTRA_SUBJECT,
+                        "");
+                String statement =  tvSms.getText().toString();
+                email.putExtra(Intent.EXTRA_TEXT,
+                        statement);
+
+                email.setType("message/rfc822");
+
+                startActivity(Intent.createChooser(email,
+                        "Choose an Email client :"));
+            }
+        });
 
         btnRetrieve.setOnClickListener(new View.OnClickListener() {
             @Override
