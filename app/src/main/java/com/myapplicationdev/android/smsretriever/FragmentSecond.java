@@ -90,9 +90,15 @@ public class FragmentSecond extends Fragment {
                 Uri uri = Uri.parse("content://sms");
                 String[] reqCols = new String[]{"date", "address", "body", "type"};
                 ContentResolver cr = getActivity().getContentResolver();
-                String filter = "body LIKE ? OR body LIKE ?";
+                String filter = "body LIKE ?";
                 String textString = etFilter.getText().toString();
-                String[] filterArgs = textString.split(" ");
+                String[] splitString = textString.split(" ");
+
+                String[] filterArgs = {};
+                for (int i=0;i< splitString.length;i++){
+                        String name = "%" + splitString[i].toString() + "%";
+                        filterArgs.
+                }
                 Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
                 String smsBody = "";
                 if (cursor.moveToFirst()) {
