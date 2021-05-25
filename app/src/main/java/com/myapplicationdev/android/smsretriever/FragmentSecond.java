@@ -92,30 +92,50 @@ public class FragmentSecond extends Fragment {
                 ContentResolver cr = getActivity().getContentResolver();
                 String filter = "body LIKE ?";
                 String textString = etFilter.getText().toString();
-//              String[] splitString = textString.split(" ");
-                String[] filterArgs = {"%" + textString + "%"};
-//                for (int i=0;i< splitString.length;i++){
-//                        String name = "%" + splitString[i].toString() + "%";
-//                        filterArgs.a
-//                }
-                Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
+                String[] splitString = textString.split(" ");
+                //String[] filterArgs = {};
                 String smsBody = "";
-                if (cursor.moveToFirst()) {
-                    do {
-                        long dateInMillis = cursor.getLong(0);
-                        String date = (String) DateFormat.format("dd MMM yyyy h:mm:ss aa", dateInMillis);
-                        String address = cursor.getString(1);
-                        String body = cursor.getString(2);
-                        String type = cursor.getString(3);
-                        if (type.equalsIgnoreCase("1")) {
-                            type = "Inbox:";
-                        } else {
-                            type = "Sent:";
-                        }
-                        smsBody += type + " " + address + "\n at " + date
-                                + "\n\"" + body + "\"\n\n";
-                    } while (cursor.moveToNext());
+                for (int i=0;i< splitString.length;i++){
+                        String name = "%" + splitString[i].toString() + "%";
+                        String[] filterArgs = {name};
+                    Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
+
+                    if (cursor.moveToFirst()) {
+                        do {
+                            long dateInMillis = cursor.getLong(0);
+                            String date = (String) DateFormat.format("dd MMM yyyy h:mm:ss aa", dateInMillis);
+                            String address = cursor.getString(1);
+                            String body = cursor.getString(2);
+                            String type = cursor.getString(3);
+                            if (type.equalsIgnoreCase("1")) {
+                                type = "Inbox:";
+                            } else {
+                                type = "Sent:";
+                            }
+                            smsBody += type + " " + address + "\n at " + date
+                                    + "\n\"" + body + "\"\n\n";
+                        } while (cursor.moveToNext());
+                    }
                 }
+
+//                Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
+//                String smsBody = "";
+//                if (cursor.moveToFirst()) {
+//                    do {
+//                        long dateInMillis = cursor.getLong(0);
+//                        String date = (String) DateFormat.format("dd MMM yyyy h:mm:ss aa", dateInMillis);
+//                        String address = cursor.getString(1);
+//                        String body = cursor.getString(2);
+//                        String type = cursor.getString(3);
+//                        if (type.equalsIgnoreCase("1")) {
+//                            type = "Inbox:";
+//                        } else {
+//                            type = "Sent:";
+//                        }
+//                        smsBody += type + " " + address + "\n at " + date
+//                                + "\n\"" + body + "\"\n\n";
+//                    } while (cursor.moveToNext());
+//                }
                 tvFrag2.setText(smsBody);
             }
         });
