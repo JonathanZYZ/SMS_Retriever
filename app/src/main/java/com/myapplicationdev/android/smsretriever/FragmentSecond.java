@@ -77,10 +77,10 @@ public class FragmentSecond extends Fragment {
             @Override
             public void onClick(View view) {
                 int permissionCheck = PermissionChecker.checkSelfPermission
-                        (FragmentSecond.class, Manifest.permission.READ_SMS);
+                        (getActivity(), Manifest.permission.READ_SMS);
 
                 if (permissionCheck != PermissionChecker.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(FragmentSecond.class,
+                    ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.READ_SMS}, 0);
                     // stops the action from proceeding further as permission not
                     //  granted yet
@@ -89,7 +89,7 @@ public class FragmentSecond extends Fragment {
 
                 Uri uri = Uri.parse("content://sms");
                 String[] reqCols = new String[]{"date", "address", "body", "type"};
-                ContentResolver cr = getContentResolver();
+                ContentResolver cr = getActivity().getContentResolver();
                 String filter = "body LIKE ? OR body LIKE ?";
                 String textString = etFilter.getText().toString();
                 String[] filterArgs = textString.split(" ");
