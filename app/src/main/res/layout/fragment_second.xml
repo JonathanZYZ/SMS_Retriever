@@ -31,7 +31,7 @@
             android:drawableLeft="@drawable/ic_baseline_text_fields_24"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Text only"
+            android:hint="Enter text only"
             android:inputType="textShortMessage"
             android:textSize="14sp" />
 
@@ -39,6 +39,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAddTextFrag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="RETRIEVE SMS" />
 
             <Button
                 android:id="@+id/btnEmail"
@@ -50,15 +60,6 @@
                 android:layout_weight="1"
                 android:text="Send SMS Email " />
 
-            <Button
-                android:id="@+id/btnAddTextFrag2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:text="RETRIEVE SMS" />
         </LinearLayout>
 
         <TextView
