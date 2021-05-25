@@ -26,11 +26,11 @@
         android:id="@+id/btnAddTextFrag2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Text" />
+        android:text="RETRIEVE SMS" />
     <TextView
         android:id="@+id/tvTextFrag2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Frag" />
+        android:text="" />
 
 </LinearLayout>
