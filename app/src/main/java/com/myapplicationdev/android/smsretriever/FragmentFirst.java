@@ -49,8 +49,9 @@ public class FragmentFirst extends Fragment {
                 String[] reqCols = new String[]{"date", "address", "body", "type"};
 
                 ContentResolver cr = getActivity().getContentResolver();
-                String filter = "body LIKE ?";
-                String[] filterArgs = {etNumber.toString()};
+                String filter = "address LIKE ?";
+                String textString = etNumber.getText().toString();
+                String[] filterArgs = {"%" + textString + "%"};
 
                 Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
                 String smsBody = "";
