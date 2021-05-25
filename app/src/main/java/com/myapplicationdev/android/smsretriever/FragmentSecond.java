@@ -92,13 +92,12 @@ public class FragmentSecond extends Fragment {
                 ContentResolver cr = getActivity().getContentResolver();
                 String filter = "body LIKE ?";
                 String textString = etFilter.getText().toString();
-                String[] splitString = textString.split(" ");
-
-                String[] filterArgs = {};
-                for (int i=0;i< splitString.length;i++){
-                        String name = "%" + splitString[i].toString() + "%";
-                        filterArgs.
-                }
+//              String[] splitString = textString.split(" ");
+                String[] filterArgs = {"%" + textString + "%"};
+//                for (int i=0;i< splitString.length;i++){
+//                        String name = "%" + splitString[i].toString() + "%";
+//                        filterArgs.a
+//                }
                 Cursor cursor = cr.query(uri, reqCols, filter, filterArgs, null);
                 String smsBody = "";
                 if (cursor.moveToFirst()) {
